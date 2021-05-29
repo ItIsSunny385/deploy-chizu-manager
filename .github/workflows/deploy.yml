@@ -33,9 +33,9 @@ jobs:
       - name: Install Firebase Tools
         run: npm install firebase-tools -g
       
-      # Change Project ID
-      - name: Change Project ID
-        run: sed -i s/\<project-name-here\>/${{ secrets.FIREBASE_PROJECT_ID }}/ .firebaserc
+      # Project ID の設定
+      - name: Set Project ID
+        run: firebase use ${{ secrets.FIREBASE_PROJECT_ID }}
         working-directory: ${{env.working-directory}}
 
       # Firebaseへデプロイ
