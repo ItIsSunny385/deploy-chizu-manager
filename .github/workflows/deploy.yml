@@ -28,8 +28,6 @@ jobs:
       - name: npm install
         run: npm install
         working-directory: ${{env.working-directory}}
-        env:
-          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
 
       # Firebaseへログイン
       - name: Login to Firebase
