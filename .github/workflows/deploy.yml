@@ -35,7 +35,7 @@ jobs:
       
       # Change Project ID
       - name: Change Project ID
-        run: sed s/<project-name-here>/${{ secrets.FIREBASE_PROJECT_ID }}/ .firebaserc
+        run: sed s/\<project-name-here\>/${{ secrets.FIREBASE_PROJECT_ID }}/ .firebaserc
         working-directory: ${{env.working-directory}}
 
       # Firebaseへログイン
