@@ -29,16 +29,16 @@ jobs:
         run: npm install
         working-directory: ${{env.working-directory}}
       
-      # Firebaseツールをインストール
+      # Firebase ツールをインストール
       - name: Install Firebase Tools
         run: npm install firebase-tools -g
       
       # Project ID の設定
       - name: Set Project ID
-        run: firebase use ${{ secrets.FIREBASE_PROJECT_ID }}　--token ${{ secrets.FIREBASE_TOKEN }}
+        run: sed -i s/\<project-name-here\>/${{ secrets.FIREBASE_PROJECT_ID }}/ .firebaserc
         working-directory: ${{env.working-directory}}
 
-      # Firebaseへデプロイ
+      # Firebase へデプロイ
       - name: Deploy to Firebase
         run: firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}
         working-directory: ${{env.working-directory}}
