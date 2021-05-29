@@ -28,26 +28,15 @@ jobs:
       - name: npm install
         run: npm install
         working-directory: ${{env.working-directory}}
-      
-      # Firebaseツールをインストール
-      - name: Install Firebase Tool
-        run: npm install firebase-tools -g
-      
-      # Change Project ID
-      - name: Change Project ID
-        run: sed -i s/\<project-name-here\>/${{ secrets.FIREBASE_PROJECT_ID }}/ .firebaserc
-        working-directory: ${{env.working-directory}}
 
       # Firebaseへログイン
-      - name: Login to Firebase
-        run: firebase login --no-localhost
-        working-directory: ${{env.working-directory}}
-
-      # Firebaseへデプロイ
       - name: Deploy to Firebase
-        run: firebase deploy
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy
         working-directory: ${{env.working-directory}}
         env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           FIREBASE_DEBUG: 'false'
           FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
           FIREBASE_AUTH_DOMAIN: ${{ secrets.FIREBASE_AUTH_DOMAIN }}
