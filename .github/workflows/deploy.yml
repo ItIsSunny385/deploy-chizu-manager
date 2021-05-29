@@ -32,22 +32,13 @@ jobs:
       # Firebaseツールをインストール
       - name: Install Firebase Tool
         run: npm install firebase-tools -g
-      
-      # Change Project ID
-      - name: Change Project ID
-        run: sed s/\<project-name-here\>/${{ secrets.FIREBASE_PROJECT_ID }}/ .firebaserc
-        working-directory: ${{env.working-directory}}
-
-      # Firebaseへログイン
-      - name: Login to Firebase
-        run: firebase login --no-localhost
-        working-directory: ${{env.working-directory}}
-        env:
-          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
 
       # Firebaseへデプロイ
       - name: Deploy to Firebase
-        run: firebase deploy
+        run: |
+          sed s/\<project-name-here\>/${{ secrets.FIREBASE_PROJECT_ID }}/ .firebaserc
+          firebase login --no-localhost 
+          firebase deploy
         working-directory: ${{env.working-directory}}
         env:
           FIREBASE_DEBUG: 'false'
