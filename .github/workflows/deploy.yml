@@ -28,6 +28,10 @@ jobs:
       - name: npm install
         run: npm install
         working-directory: ${{env.working-directory}}
+      
+      # Firebaseツールをインストール
+      - name: Install Firebase Tool
+        run: npm install firebase-tools -g
 
       # Firebaseへログイン
       - name: Login to Firebase
