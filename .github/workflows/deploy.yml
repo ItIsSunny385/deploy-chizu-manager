@@ -35,8 +35,10 @@ jobs:
       
       # Project ID の設定
       - name: Set Project ID
-        run: firebase use ${{ secrets.FIREBASE_PROJECT_ID }}
+        run: firebase use ${{ secrets.FIREBASE_PROJECT_ID }}　--token $FIREBASE_TOKEN
         working-directory: ${{env.working-directory}}
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
       # Firebaseへデプロイ
       - name: Deploy to Firebase
