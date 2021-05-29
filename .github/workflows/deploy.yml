@@ -30,7 +30,8 @@ jobs:
           npm install
           firebase login --no-localhost
         working-directory: ${{env.working-directory}}
-        FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+        env:
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
 
       # Firebaseへデプロイ
       - name: Deploy to Firebase
