@@ -1,0 +1,27 @@
+name: Deploy Chizu Manager To Firebase 
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./project/chizu-manager-firebase
+
+    steps: 
+      - name: Chechout Chizu Manager
+        uses: actions/checkout@v2
+        with:
+          repository: ItIsSunny385/chizu-manager-firebase
+          path: project
+      - name: Set Node.js 14.x
+        users: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: ls
+        runs: ls
+        working-directory: ${{env.working-directory}}
+      
+

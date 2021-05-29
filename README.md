@@ -1,2 +1,2 @@
-# deploy-chizu-manager
+# 地図マネージャデプロイアクション
 地図マネージャを Firebase にデプロイする Action です。
