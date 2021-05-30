@@ -1,4 +1,4 @@
-name: Deploy1 (with Secrets)
+name: Deploy to Firebase
 
 on:
   workflow_dispatch:
