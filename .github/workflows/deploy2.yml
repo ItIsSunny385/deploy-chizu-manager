@@ -76,7 +76,7 @@ jobs:
       
       # Project ID の設定
       - name: Set Project ID
-        run: sed -i s/\<project-name-here\>/${{secrets[github.event.inputs.firebaseProjectId]}}/ .firebaserc
+        run: sed -i s/\<project-name-here\>/${{ secrets[github.event.inputs.firebaseProjectId] }}/ .firebaserc
         working-directory: ${{env.working-directory}}
 
       # Firebase へデプロイ
@@ -85,13 +85,13 @@ jobs:
         working-directory: ${{env.working-directory}}
         env:
           FIREBASE_DEBUG: 'false'
-          FIREBASE_API_KEY: ${{secrets[github.event.inputs.firebaseApiKey]}}
-          FIREBASE_AUTH_DOMAIN: ${{secrets[github.event.inputs.firebaseAuthDomain]}}
-          FIREBASE_PROJECT_ID: ${{secrets[github.event.inputs.firebaseProjectId]}}
-          FIREBASE_STORAGE_BUCKET: ${{secrets[github.event.inputs.firebaseStorageBucket]}}
-          FIREBASE_MESSAGING_SENDER_ID: ${{secrets[github.event.inputs.firebaseMessagingSenderId]}}
-          FIREBASE_APP_ID: ${{secrets[github.event.inputs.firebaseAppId]}}
-          GOOGLE_MAPS_API_KEY: ${{secrets[github.event.inputs.googleMapsApiKey]}}
-          GOOGLE_MAPS_CENTER_LAT: ${{secrets[github.event.inputs.googleMapsCenterLat]}}
-          GOOGLE_MAPS_CENTER_LNG: ${{secrets[github.event.inputs.googleMapsCenterLng]}}
+          FIREBASE_API_KEY: ${{ secrets[github.event.inputs.firebaseApiKey] }}
+          FIREBASE_AUTH_DOMAIN: ${{ secrets[github.event.inputs.firebaseAuthDomain] }}
+          FIREBASE_PROJECT_ID: ${{ secrets[github.event.inputs.firebaseProjectId] }}
+          FIREBASE_STORAGE_BUCKET: ${{ secrets[github.event.inputs.firebaseStorageBucket] }}
+          FIREBASE_MESSAGING_SENDER_ID: ${{ secrets[github.event.inputs.firebaseMessagingSenderId] }}
+          FIREBASE_APP_ID: ${{ secrets[github.event.inputs.firebaseAppId] }}
+          GOOGLE_MAPS_API_KEY: ${{ secrets[github.event.inputs.googleMapsApiKey] }}
+          GOOGLE_MAPS_CENTER_LAT: ${{ secrets[github.event.inputs.googleMapsCenterLat] }}
+          GOOGLE_MAPS_CENTER_LNG: ${{ secrets[github.event.inputs.googleMapsCenterLng] }}
           GOOGLE_MAPS_ZOOM: '15'
