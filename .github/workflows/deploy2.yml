@@ -43,10 +43,6 @@ on:
         description: Google Maps Defeult Center Longitude
         required: true
         default: '139.6917337'
-      googleMapsZoom:
-        description: Google Maps Default Zoom Level
-        required: true
-        default: '15'
 
 jobs:
   deploy:
@@ -98,4 +94,4 @@ jobs:
           GOOGLE_MAPS_API_KEY: ${{secrets[github.event.inputs.googleMapsApiKey]}}
           GOOGLE_MAPS_CENTER_LAT: ${{secrets[github.event.inputs.googleMapsCenterLat]}}
           GOOGLE_MAPS_CENTER_LNG: ${{secrets[github.event.inputs.googleMapsCenterLng]}}
-          GOOGLE_MAPS_ZOOM: ${{secrets[github.event.inputs.googleMapsZoom]}}
+          GOOGLE_MAPS_ZOOM: '15'
