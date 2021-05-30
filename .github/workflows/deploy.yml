@@ -1,4 +1,4 @@
-name: Deploy Chizu Manager To Firebase 
+name: Deploy1 (with Secrets)
 
 on:
   workflow_dispatch:
