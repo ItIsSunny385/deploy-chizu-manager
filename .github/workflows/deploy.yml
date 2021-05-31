@@ -38,6 +38,10 @@ jobs:
         run: sed -i s/\<project-name-here\>/${{ secrets.FIREBASE_PROJECT_ID }}/ .firebaserc
         working-directory: ${{env.working-directory}}
 
+      ## Basic 認証の設定
+      - name: Set Basic Authentication
+        run: firebase functions:config:set basic_auth.username='${{ secrets.BASIC_AUTH_USERNAME }}' basic_auth.password='${{ secrets.BASIC_AUTH_PASSWORD }}' --token ${{ secrets.FIREBASE_TOKEN }}
+
       # Firebase へデプロイ
       - name: Deploy to Firebase
         run: firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}
