@@ -1,0 +1,67 @@
+name: Deploy (Version)
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        ref: version (The branch, tag or SHA)
+        required: false
+        default: ''
+
+jobs:
+  deploy:
+    
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./project/chizu-manager-firebase
+
+    steps: 
+      # リポジトリのチェックアウト
+      - name: Chechout Chizu Manager
+        uses: actions/checkout@v2
+        with:
+          repository: ItIsSunny385/chizu-manager-firebase
+          path: project
+          ref: github.event.inputs.ref
+
+      # Node.js 14 の初期設定
+      - name: Set Node.js 14.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      
+      # npm install
+      - name: npm install
+        run: npm install
+        working-directory: ${{env.working-directory}}
+      
+      # Firebase ツールをインストール
+      - name: Install Firebase Tools
+        run: npm install firebase-tools -g
+      
+      # Project ID の設定
+      - name: Set Project ID
+        run: sed -i s/\<project-name-here\>/${{ secrets.FIREBASE_PROJECT_ID }}/ .firebaserc
+        working-directory: ${{env.working-directory}}
+
+      ## Basic 認証の設定
+      - name: Set Basic Authentication
+        run: firebase functions:config:set basic_auth.username='${{ secrets.BASIC_AUTH_USERNAME }}' basic_auth.password='${{ secrets.BASIC_AUTH_PASSWORD }}' --token ${{ secrets.FIREBASE_TOKEN }}
+        working-directory: ${{env.working-directory}}
+
+      # Firebase へデプロイ
+      - name: Deploy to Firebase
+        run: firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}
+        working-directory: ${{env.working-directory}}
+        env:
+          FIREBASE_DEBUG: 'false'
+          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+          FIREBASE_AUTH_DOMAIN: ${{ secrets.FIREBASE_AUTH_DOMAIN }}
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+          FIREBASE_STORAGE_BUCKET: ${{ secrets.FIREBASE_STORAGE_BUCKET }}
+          FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
+          FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+          GOOGLE_MAPS_CENTER_LAT: ${{ secrets.GOOGLE_MAPS_CENTER_LAT }}
+          GOOGLE_MAPS_CENTER_LNG: ${{ secrets.GOOGLE_MAPS_CENTER_LNG }}
+          GOOGLE_MAPS_ZOOM: ${{ secrets.GOOGLE_MAPS_ZOOM }}
