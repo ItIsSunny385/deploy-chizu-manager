@@ -3,8 +3,8 @@ name: Deploy (Version)
 on:
   workflow_dispatch:
     inputs:
-      version:
-        ref: version (The branch, tag or SHA)
+      ref:
+        description: version (The branch, tag or SHA)
         required: false
         default: ''
 
@@ -22,7 +22,7 @@ jobs:
         with:
           repository: ItIsSunny385/chizu-manager-firebase
           path: project
-          ref: github.event.inputs.ref
+          ref: ${{ github.event.inputs.ref }}
 
       # Node.js 14 の初期設定
       - name: Set Node.js 14.x
